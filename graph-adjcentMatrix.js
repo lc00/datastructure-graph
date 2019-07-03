@@ -136,15 +136,23 @@ console.log('pac-man item!!', item)
   console.log('arr[arr.length-1]', arr[arr.length-1])
   console.log('item!!', item)
           // if yes, add into this array
-            if(isNeighbor(item, key))  arr.push(key)
+            if(isNeighbor(item, key))  {
+              arr.push(key)
+              break
+            }
   
           // else, check the previous item if it's a neighbor
             else {
               //  if yes, create a copy of this array and add key into this array
-              if(arr[-2] && isNeighbor(arr[-2], key)) {
+              let item
+              arr.length <= 2 ? item = arr[0] : item = arr[arr.length-2]
+
+              if(isNeighbor(item, key)) {
                 let newArr = JSON.parse(JSON.stringify(arr))
+                newArr.pop()
                 newArr.push(key)
                 pathArr.push(newArr)
+                break
               } 
               else continue
             }
