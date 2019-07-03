@@ -61,6 +61,7 @@ function bfs(grid, startCellKey) {
   // shift one
   while(queue.length > 0) {
     let key = queue.shift()
+    console.log('')
     console.log('key...', key)
 
       // is it visited
@@ -69,13 +70,6 @@ function bfs(grid, startCellKey) {
     // if no, explore
     // check if cell exist
 
-    if (!(key in grid) ) {
-     console.log('inside !key in grid')
-      continue
-
-    }
-
-    if(grid[key] === 'wall') continue
     
 // console.log('meow ')
 
@@ -158,10 +152,6 @@ console.log('pac-man item!!', item)
   
         }
 
-
-        console.log('!!! pathArr !!!', pathArr)
-
-
         visited.push(key)
 
         let coordArr = key.split(',')
@@ -177,16 +167,23 @@ console.log('pac-man item!!', item)
         let top = Number(x) + ',' + (Number(y) - 1)
         let bottom = Number(x) + ',' + (Number(y) + 1)
 
-        console.log('left', left)
-        console.log('right', right)
-        console.log('top', top)
-        console.log('bottom', bottom)
+        let neighborArr = []
+        neighborArr.push(left)
+        neighborArr.push(top)
+        neighborArr.push(right)
+        neighborArr.push(bottom)  
+
+        neighborArr.forEach(key => {
+          if (key in grid && grid[key] !== 'wall') {
+            queue.push(key)
+  
+          }
+        })
         
-        queue.push(left)
-        queue.push(right)
-        queue.push(top)
-        queue.push(bottom)  
-        console.log('queue...', queue)         
+      
+        console.log('queue...', queue)    
+        console.log('!!! pathArr !!!', pathArr)
+
       }
         
     }
